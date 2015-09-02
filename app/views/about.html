@@ -1,1 +1,50 @@
-<p>This is the about view.</p>
+<div class="page-header">
+    <h1><i class="fa fa-optin-monster text-primary"></i>&nbsp;&nbsp;{{'To Build Data Site'}}</h1>
+    <a class="pull-right btn btn-primary" ng-click="addSite()"><i class="glyphicon glyphicon-plus"></i> Add New Site</a>
+</div>
+<div class="page-content">
+    <div ui-sortable ng-model="sites" class="sortableDiv">
+        <div class="input-group menuItem" ng-repeat="site in sites track by $index">
+            <input type="text" ng-model="site" ng-change="siteChange($index,site)"
+                   class="form-control" disabled="disabled"/>
+                <span class="input-group-btn">
+                    <!--这里千万不要用没有type的button替代a,因为没有type的button会成为submit导致modal退出-->
+                    <a class="pull-right btn btn-default" ng-href="#/" aria-label="View"><i
+                            class="fa fa-internet-explorer"></i>&nbsp;&nbsp;View in Browser</a>
+                </span>
+                <span class="input-group-btn">
+                    <!--这里千万不要用没有type的button替代a,因为没有type的button会成为submit导致modal退出-->
+                    <a class="pull-right btn btn-primary" ng-href="#/" aria-label="Edit"><i
+                            class="fa fa-edit"></i>&nbsp;&nbsp;Edit</a>
+                </span>
+                <span class="input-group-btn">
+                    <a class="pull-right btn btn-success" ng-click="manageSite($index)" aria-label="Manage"><i
+                            class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;Manage</a>
+                </span>
+                <span class="input-group-btn">
+                    <a class="pull-right btn btn-warning" ng-click="removeSite($index)" aria-label="Remove"><i
+                            class="glyphicon glyphicon-trash"></i></a>
+                </span>
+        </div>
+        <div ui-sortable ng-model="newSites" class="sortableDiv">
+            <div class="input-group menuItem" ng-repeat="newSite in newSites track by $index">
+                <input type="text" ng-model="newSite" ng-change="newSiteChange($index,newSite)"
+                       placeholder="input the path name of your site  here, just english, click edit to build the page!"
+                       class="form-control"/>
+                <span class="input-group-btn">
+                    <!--这里千万不要用没有type的button替代a,因为没有type的button会成为submit导致modal退出-->
+                    <a class="pull-right btn btn-primary" ng-href="#/" aria-label="Edit"><i
+                            class="fa fa-edit"></i>&nbsp;&nbsp;Edit</a>
+                </span>
+                <span class="input-group-btn">
+                    <a class="pull-right btn btn-success" ng-click="manageSite($index)" aria-label="Manage"><i
+                            class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;Manage</a>
+                </span>
+                <span class="input-group-btn">
+                    <a class="pull-right btn btn-warning" ng-click="removeNewSite($index)" aria-label="Remove"><i
+                            class="glyphicon glyphicon-trash"></i></a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

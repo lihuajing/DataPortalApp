@@ -31,15 +31,20 @@ angular
             })
             .when('/about', {
                 templateUrl: 'views/about.html',
-                controller: 'AboutCtrl',
+                controller: 'SiteCtrl',
                 controllerAs: 'about'
             })
             .otherwise({
                 redirectTo: '/'
             });
     })
-    .controller('rootCtrl', ['$scope', '$modal', function ($scope, $modal) {
+    .controller('RootCtrl', ['$scope', '$modal', function ($scope, $modal) {
+        $scope.toggleActive = function ($event) {
+            angular.element('.active').removeClass('active');
+            angular.element($event.currentTarget).addClass('active');
+        };
         $scope.form = {
+            myTitle: 'My Data Site',
             slogan: 'this is a data tool',
             uploadPic: 'yeoman.png',
             pageHead: 'DashBoard'
@@ -54,6 +59,7 @@ angular
         window.onresize = $scope.changeHeight;
         window.onscroll = $scope.changeHeight;
         $scope.openSettings = function () {
+            $scope.oldTitle = $scope.form.myTitle;
             $scope.oldSlogan = $scope.form.slogan;
             $scope.oldUploadPic = $scope.form.uploadPic;
             $scope.oldPageHead = $scope.form.pageHead;
@@ -84,6 +90,7 @@ angular
             };
 
             $scope.dismiss = function () {
+                $scope.form.myTitle = $scope.oldTitle;
                 $scope.form.slogan = $scope.oldSlogan;
                 $scope.form.uploadPic = $scope.oldUploadPic;
                 $scope.form.pageHead = $scope.oldPageHead;
@@ -95,7 +102,8 @@ angular
             };
         }
     ])
-    .controller('menuSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance',
+    .
+    controller('menuSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance',
         function ($scope, $timeout, $rootScope, $modalInstance) {
 
             $scope.menuChange = function (index, menu) {
